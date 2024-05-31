@@ -12,14 +12,27 @@ document.addEventListener('DOMContentLoaded', function () {
     container.appendChild(renderer.domElement);
 
     var loader = new THREE.GLTFLoader();
-    loader.load('https://hoodie3dmodel.s3.us-west-1.amazonaws.com/scene.gltf', function (gltf) {
+    loader.load('https://whitetee3dmodel.s3.us-west-1.amazonaws.com/whitetee.gltf', function (gltf) {
         var model = gltf.scene;
 
-        // Scale the model
-        model.scale.set(15, 15, 15); // Adjust the scaling factor as needed
+        // Log original model size
+        console.log('Original model size:', model.scale);
+
+        // Aggressively scale the model
+        model.scale.set(50, 50, 50);
+
+        // Log new model size
+        console.log('Scaled model size:', model.scale);
+
+        // Center the model
+        var bbox = new THREE.Box3().setFromObject(model);
+        var cent = bbox.getCenter(new THREE.Vector3());
+        model.position.copy(cent).multiplyScalar(-1);
 
         scene.add(model);
-        camera.position.z = 5;
+
+        // Adjust camera position to fit the model
+        camera.position.z = 10; // Adjust the camera position to ensure the model fits in view
 
         var animate = function () {
             requestAnimationFrame(animate);
@@ -39,3 +52,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
