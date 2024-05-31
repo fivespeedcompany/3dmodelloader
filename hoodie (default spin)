@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
     container.appendChild(renderer.domElement);
 
     var loader = new THREE.GLTFLoader();
-    loader.load('https://whitetee3dmodel.s3.us-west-1.amazonaws.com/whitetee.gltf', function (gltf) {
+    loader.load('https://hoodie3dmodel.s3.us-west-1.amazonaws.com/scene.gltf', function (gltf) {
         var model = gltf.scene;
 
         // Log original model size
         console.log('Original model size:', model.scale);
 
         // Aggressively scale the model
-        model.scale.set(50, 50, 50);
+        model.scale.set(15, 15, 15);
 
         // Log new model size
         console.log('Scaled model size:', model.scale);
